@@ -59,10 +59,6 @@ class Calculator{
             case "÷":
                 this.operand1 = +this.operand1 / +this.operand2;
             break;
-
-            case "%":
-                this.operand1 = +this.operand1 * (+this.operand2 / 100);
-            break;
         }
         this.operator = "";
         this.operand2 = 0;
@@ -80,26 +76,36 @@ const equalsButton = document.querySelector("[data-equals]");
 
 const calculator = new Calculator(operand1Element, operand2Element);
 
+function playSound() {
+    const audio = new Audio('sonido.mp3');
+    audio.play();
+}
+
 clearButton.addEventListener("click", () => {
     calculator.clear();
+    playSound();
 });
 
 numberButtons.forEach(button => {
     button.addEventListener("click", () => {
         calculator.appendNumber(button.innerHTML);
+        playSound();
     })
 });
 
 deleteButton.addEventListener('click', () =>{
     calculator.delete();
+    playSound();
 });
 
 operationButtons.forEach(button => {
     button.addEventListener('click', () => {
         calculator.operation(button.innerHTML);
+        playSound();
     })
 });
 
 equalsButton.addEventListener('click', () =>{
     calculator.calc();
+    playSound();
 });
